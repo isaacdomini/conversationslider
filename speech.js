@@ -75,16 +75,21 @@ function slide(){
     randWord = Math.floor((Math.random()*5));
     keyword = keywords[randWord];
     console.log("Keyword:"+keyword);
-    var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=af7514ef8caf7e6f8b7de3f2c714f885&tags='+keyword+'&sort=relevance&safe_search=1&format=json&nojsoncallback=1';
+    var url = '//api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?';
     console.log(url);
     g=0;
     $.getJSON(url,
+	{
+	tags: keyword,
+	tagmode: "any",
+	format: "json"
+	},
     function(data){
         if(data.stat != 'fail') {
-          randomImage = Math.floor((Math.random()*24));
-          image = data.photos.photo[randomImage];
-          imageurl = "https://farm4.staticflickr.com/"+image.server+"/"+image.id+"_"+image.secret+".jpg"
-          document.getElementById('image').src = imageurl;
+          randomImage = Math.floor((Math.random()*data.items.length));
+	  imageurl = data.items[randomImage]['media']['m'].replace("_m","_b");
+          document.getElementById('image').src = imageurl.toString();
+	  console.log(imageurl.toString());
         }
         console.log("flickr response"+data.stat);
     });
