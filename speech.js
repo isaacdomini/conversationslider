@@ -70,7 +70,7 @@ window.onload = function (){
 function slide(){
   window.setInterval( function(){
     console.log("TEST");
-
+    document.getElementById('keywords').innerHTML = keywords;
     console.log(keywords);
     randWord = Math.floor((Math.random()*5));
     keyword = keywords[randWord];
@@ -90,7 +90,8 @@ function slide(){
 	  imageurl = data.items[randomImage]['media']['m'].replace("_m","_b");
           document.getElementById('image').src = imageurl.toString();
 	  console.log(imageurl.toString());
-        }
+          document.getElementById('keywordDisplay').innerHTML = keyword;
+	}
         console.log("flickr response"+data.stat);
     });
 
