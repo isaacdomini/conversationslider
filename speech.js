@@ -28,6 +28,8 @@ else {
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         word = event.results[i][0].transcript.split(" ");
+	console.log("EVENT RESULTS");
+	console.log(event.results[i]);
         for(var c = 0; c<word.length;c++){
           if(word[c].length>4){
 
